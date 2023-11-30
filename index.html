@@ -84,13 +84,13 @@
           <h2>Проблема</h2>
           </section>
           <section>
-            <img src="img/table1.png">
+            <img style="object-fit:contain; height:300px;" src="img/table1.png">
           </section>
           <section>
-            <img src="img/table2.png">
+            <img style="object-fit:contain; height:300px;" src="img/table2.png">
           </section>
           <section>
-            <img src="img/table3.png">
+            <img style="object-fit:contain; height:300px;" src="img/table3.png">
           </section>
         </section>
 				<section>
@@ -99,15 +99,15 @@
         </section>
 				<section>
           <section>
-            <h3>Enso Language</h3>
-          </section>
-          <section>
-            <h3>Текстовое + визуальное представление</h3>
-            <img src="img/enso-demo.png" />
+            <h2>Enso Language</h2>
           </section>
           <section>
             <h3>Функциональный</h3>
             <img style="object-fit: contain; height: 450px;" src="img/enso-complex.png" />
+          </section>
+          <section>
+            <h3>Текстовое + визуальное представление</h3>
+            <img src="img/enso-demo.png" />
           </section>
           <section>
             <h3>GraalVM</h3>
@@ -139,19 +139,41 @@
           <h6 class="blurred">Конец?</h6>
         </section>
 				<section>
-          <h2>WebAssembly (WASM)</h2>
+          <section>
+            <h2>WebAssembly (WASM)</h2>
+            <ul>
+              <li class="fragment">Стандарт VM и байт-кода к ней</li>
+              <li class="fragment">Работает во всех современных браузерах</li>
+              <li class="fragment">Быстрый</li>
+              <li class="fragment">Безопасный</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Rust — самый популярный язык для WASM</h2>
+            <img style="object-fit: contain; height: 500px;" src="img/wasm-languages.png" />
+            <small><a href="https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html">https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html</a></small>
+          </section>
+          <section>
+            <img style="object-fit: contain; height: 500px;" src="img/wasm.png" />
+          </section>
+        </section>
+				<section>
+          <h2>Архитектура</h2>
+          <img style="object-fit: contain; height: 500px;" src="img/architecture.png" />
+        </section>
+				<section>
+          <h2>Парсер</h2>
           <ul>
-            <li class="fragment">Стандарт виртуальной машины и байт-кода к ней</li>
-            <li class="fragment">Работает во всех современных браузерах</li>
-            <li class="fragment">Быстрый</li>
-            <li class="fragment">Безопасный</li>
-            <li class="fragment">Нет прямого доступа к ОС и DOM</li>
+            <li class="fragment">Scala → Rust</li>
+            <li class="fragment">100 Мб → 4 Мб</li>
+            <li class="fragment"><span style="font-size: 0.8em; font-family: monospace;">fn parse(string: &str) -> Result&lt;Ast&gt;</span></li>
+            <li class="fragment">JNI-обертка для использования в бекенде</li>
           </ul>
         </section>
 				<section>
-          <h2>Rust — самый популярный язык для WASM</h2>
-          <img src="img/wasm-languages.png" />
-          <small><a href="https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html">https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html</a></small>
+          <section>
+            <h2>EnsoGL</h2>
+          </section>
         </section>
 				<section>
           <section>
@@ -179,9 +201,8 @@ element.style.backgroundColor = "blue";
         </section>
 				<section>
           <h2>Canvas</h2>
-          <section>
-            <div style="display: flex;">
-            <pre><code data-trim style="font-size: 0.5em">
+          <div style="display: flex;">
+          <pre><code data-trim style="font-size: 0.5em">
 function draw() {
   const canvas = document.getElementById("canvas");
   if (canvas.getContext) {
@@ -197,11 +218,10 @@ function draw() {
     ctx.stroke();
   }
 }
-            </code>
-            </pre>
-            <img style="object-fit: contain;" src="img/smile.png" />
-            </div>
-          </section>
+          </code>
+          </pre>
+          <img style="object-fit: contain;" src="img/smile.png" />
+          </div>
         </section>
 				<section>
           <section>
@@ -216,20 +236,9 @@ function draw() {
             <img src="img/webgl-pipeline.png" />
           </section>
         </section>
-				<section>
-          <h2>Архитектура</h2>
-          <img style="object-fit: contain; height: 500px;" src="img/architecture.png" />
+        <section>
+          <img style="object-fit: contain; height: 500px;" src="img/graphics.png" />
         </section>
-				<section>
-          <h2>Парсер</h2>
-          <ul>
-            <li>Scala → Rust</li>
-            <li>100 Мб → 4 Мб</li>
-            <li>fn parse(string: &str) -> Result&lt;Ast&gt;</li>
-            <li>JNI-обертка для использования в бекенде</li>
-          </ul>
-        </section>
-				<section>EnsoGL</section>
 				<section>
           <section>
           <h2>SDF (Signed Distance Function)</h2>
@@ -374,7 +383,7 @@ pub mod unstable(Unsable) {
             </div>
           </section>
           <section>
-            <pre><code data-trim style="font-size: 0.5em;line-height: 1.8em;" class="language-glsl">
+            <pre><code data-trim style="font-size: 0.7em;line-height: 1.8em;" class="language-glsl">
 // A lot of lines of code…
 bool _3286 = mod(input_local.x, input_size.x * 0.5) < (input_size.x * 0.25);
 bool _3294 = mod(input_local.y, input_size.y * 0.5) < (input_size.y * 0.25);
@@ -396,6 +405,9 @@ output_color = mix(vec4(0.0, 0.0, 0.0, 1.0), vec4(1.0, 0.0, 0.0, 1.0), bvec4(_33
           <section>
             <h2>FRP</h2>
             <h3>(Functional Reactive Programming)</h3>
+          </section>
+          <section>
+            <img style="object-fit: contain; height: 500px;" src="img/frp-network.png" />
           </section>
           <section>
             <pre><code data-trim data-noescape class="language-rust">
@@ -475,30 +487,77 @@ let mousemove = Closure::&lt;dyn Fn(MouseEvent)&gt;::wrap(Box::new(|e| {
           <pre class="fragment"><code class="language-bash">./run gui watch --crate-path=app/gui/demo/icons</code></pre>
         </section>
 				<section>
-          <h2>Отладка</h2>
+          <section>
+            <h2>Отладка</h2>
+            <img style="object-fit: contain; height: 500px;" src="img/panic.png" />
+          </section>
+          <section>
+            <h2>Процесс починки бага</h2>
+            <ol>
+              <li class="fragment">Учишься воспроизводить</li>
+              <li class="fragment">Изучаешь исходники и думаешь</li>
+              <li class="fragment">Если не придумал, добавляешь везде <span style="font-size: 0.8em; font-family: monospace;">debug!()</span></li>
+              <li class="fragment">…</li>
+              <li class="fragment">PROFIT</li>
+            </ol>
+          </section>
         </section>
 				<section>
-          <h2>Процесс починки бага</h2>
-          <ol>
-            <li class="fragment">Учишься воспроизводить</li>
-            <li class="fragment">Изучаешь исходники и думаешь</li>
-            <li class="fragment">Если не придумал, добавляешь везде <span style="font: (--r-code-font);">debug!()</span></li>
-            <li class="fragment">…</li>
-            <li class="fragment">PROFIT</li>
-          </ol>
+          <section>
+            <h2>Тестирование</h2>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape class="language-rust">
+use wasm_bindgen_test::*;
+wasm_bindgen_test_configure!(run_in_browser);
+
+#[wasm_bindgen_test]
+fn test_whole_app() {
+    App::new().run();
+}
+            </code></pre>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape class="language-rust" style="font-size: 0.5em; line-height: 1.3em;">
+fn test_adding_node(add_node: impl Fn(&GraphEditor)) {
+    let (app, graph_editor) = init();
+    assert_eq!(graph_editor.num_nodes(), 0);
+
+    // Adding first node.
+    let (node_1_id, node_1) = graph_editor.add_node_by(&amp;add_node);
+    graph_editor.assert(Case { node_source: None, should_edit: true });
+    graph_editor.stop_editing();
+    assert_eq!(graph_editor.num_nodes(), 1);
+    next_frame();
+
+    // First node is created in the center of the screen.
+    let node_1_pos = node_1.position();
+    let screen_center = app.display.default_scene.screen_to_scene_coordinates(Vector3::zeros());
+    assert_eq!(node_1_pos.xy(), screen_center.xy());
+
+    // Adding second node with the first node selected.
+    graph_editor.model.nodes.select(node_1_id);
+    let (_, node_2) = graph_editor.add_node_by(&amp;add_node);
+    graph_editor.assert(Case { node_source: Some(node_1_id), should_edit: true });
+    assert_eq!(graph_editor.num_nodes(), 2);
+
+    // Second node is below the first and left-aligned to it.
+    let node_2_pos = node_2.position();
+    assert!(node_2_pos.y < node_1_pos.y);
+    assert_eq!(node_2_pos.x, node_1_pos.x);
+}
+            </code></pre>
+          </section>
         </section>
 				<section>
-          <h2>Тестирование</h2>
-        </section>
-				<section>
-          <h2>«Война за производительность»</h2>
+          <h3>«Война за производительность»</h3>
           <ul>
             <li class="fragment">Прекомпиляция шейдеров</li>
             <li class="fragment">Инструментарий для профилирования</li>
             <li class="fragment">Меньше слоёв → меньше draw calls</li>
             <li class="fragment">Кэширование SDF-фигур в текстуру</li>
             <li class="fragment">Magic Rectangle</li>
-            <li class="fragment">Оптимизации HTML</li>
+            <li class="fragment">Оптимизация HTML</li>
           </ul>
         </section>
 				<section>
