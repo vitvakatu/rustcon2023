@@ -287,6 +287,9 @@ float sdMoon(vec2 p, float d, float ra, float rb )
             <small><a href="https://iquilezles.org/articles/distfunctions2d/">https://iquilezles.org/articles/distfunctions2d/</a></small>
           </section>
           <section>
+            <img style="object-fit: contain; height: 500px;" src="img/sdf-operations.png" />
+          </section>
+          <section>
             <img style="object-fit: contain; height: 500px;" src="img/sdf-bool.png" />
           </section>
           <section>
@@ -313,7 +316,7 @@ pub mod local_scope(LocalScope) {
     }
 }
               </code></pre>
-              <img src="img/icon-simple.png" />
+              <img style="object-fit: contain; height: 300px;" src="img/icon-simple.png" />
             </div>
           </section>
           <section>
@@ -370,24 +373,110 @@ pub mod unstable(Unsable) {
               <img style="object-fit: contain; height: 300px;" src="img/icon-complex.png" />
             </div>
           </section>
+          <section>
+            <pre><code data-trim style="font-size: 0.5em;line-height: 1.8em;" class="language-glsl">
+// A lot of lines of code…
+bool _3286 = mod(input_local.x, input_size.x * 0.5) < (input_size.x * 0.25);
+bool _3294 = mod(input_local.y, input_size.y * 0.5) < (input_size.y * 0.25);
+bool _3298 = _3286 || _3294;
+bool _3305;
+if (_3298)
+{
+    _3305 = !(_3286 && _3294);
+}
+else
+{
+    _3305 = _3298;
+}
+output_color = mix(vec4(0.0, 0.0, 0.0, 1.0), vec4(1.0, 0.0, 0.0, 1.0), bvec4(_3305));
+            </code></pre>
+          </section>
         </section>
-				<section>FRP (Functional Reactive Programming)</section>
+				<section>
+          <section>
+            <h2>FRP</h2>
+            <h3>(Functional Reactive Programming)</h3>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape class="language-rust">
+ensogl_core::define_endpoints! {
+    Input {
+        set_size (Vector2),
+        mouse_nearby (bool),
+        click (),
+    }
+    Output {
+        clicked (),
+        is_hovered (bool),
+        state (State),
+        size (Vector2),
+    }
+}
+            </code></pre>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape data-line-numbers="1-8|4,5|6|7" class="language-rust" style="font-size: 0.7em; line-height: 1.4em;">
+// === Remove node ===
+
+frp::extend! { network
+    all_nodes <= inputs.remove_all_nodes.map(f_!(model.nodes.keys()));
+    selected_nodes <= inputs.remove_selected_nodes.map(f_!(model.nodes.all_selected()));
+    nodes_remove <- any (all_nodes, selected_nodes);
+    out.node_removed <+ nodes_to_remove;
+}
+            </code></pre>
+          </section>
+        </section>
 				<section>
           <h6 class="greyed-out">Кто мы и что делаем</h6>
           <h6 class="greyed-out">Как можно написать фронтенд на Rust?</h6>
           <h2>Как можно не написать фронтенд на Rust?</h2>
           <h6 class="blurred">Конец?</h6>
         </section>
-				<section>Многословность</section>
 				<section>
-          Пересборка
+          <section>
+            <h2>Многословность</h2>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape class="language-js">
+document.getElementById("mousemoveme").onmousemove = (e) => {
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    console.log(`Mouse position: (${x}, ${y})`);
+}
+            </code></pre>
+          </section>
+          <section>
+            <pre><code data-trim data-noescape style="font-size: 0.9em;" class="language-rust">
+use wasm_bindgen::{prelude::*, JsCast};
+use web_sys::{console, Document, HtmlElement, MouseEvent};
+
+let mousemove = Closure::&lt;dyn Fn(MouseEvent)&gt;::wrap(Box::new(|e| {
+    let rect = e
+        .target()
+        .expect("mouse event doesn’t have a target")
+        .dyn_into::&lt;HtmlElement&gt;()
+        .expect("event target should be of type HtmlElement")
+        .get_bounding_client_rect();
+    let x = (e.client_x() as f64) - rect.left();
+    let y = (e.client_y() as f64) - rect.top();
+    console::log_1(&amp;format!("Left: {x}, Top: {y}"));
+}));
+            </code></pre>
+          </section>
+        </section>
+				<section>
+          <h2>Пересборка</h2>
           <ul>
             <li class="fragment">20–30 секунд на каждую пересборку</li>
             <li class="fragment">Демо-сцены</li>
           </ul>
           <pre class="fragment"><code class="language-bash">./run gui watch --crate-path=app/gui/demo/icons</code></pre>
         </section>
-				<section><h2>Отладка</h2></section>
+				<section>
+          <h2>Отладка</h2>
+        </section>
 				<section>
           <h2>Процесс починки бага</h2>
           <ol>
