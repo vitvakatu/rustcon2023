@@ -41,7 +41,7 @@
         list-style-type: none; /* Remove default markers */
       }
 
-      li:before {
+      .reveal ul li:before {
         content: "→"; /* Use the desired marker symbol */
         color: black; /* Customize the marker color */
         margin-right: 0.5em; /* Adjust the spacing between the marker and the content */
@@ -62,7 +62,7 @@
               <ul>
                 <li>Илья Богданов</li>
                 <li>Больше пяти лет пишу на Rust</li>
-                <li>Преподаю на курсе Rust Developer в <a href="https://otus.ru/lessons/rust-developer">OTUS</a></li>
+                <li>Преподаю в <a href="https://otus.ru/lessons/rust-developer">OTUS</a></li>
                 <li>Developer @ <a href="https://enso.org">Enso</a></li>
               </ul>
             </div>
@@ -76,7 +76,7 @@
         </section>
 				<section>
           <section>
-          Проблема
+          <h2>Проблема</h2>
           </section>
           <section>
             <img src="img/table1.png">
@@ -89,38 +89,40 @@
           </section>
         </section>
 				<section>
-          Решение
+          <h2>Решение</h2>
           <video data-autoplay src="img/demo.mp4"></video>
         </section>
 				<section>
           <section>
-            Enso Language
+            <h3>Enso Language</h3>
           </section>
           <section>
-            Текстовое + визуальное представление
+            <h3>Текстовое + визуальное представление</h3>
             <img src="img/enso-demo.png" />
           </section>
           <section>
-            <h2>Функциональный</h2>
+            <h3>Функциональный</h3>
             <img style="object-fit: contain; height: 450px;" src="img/enso-complex.png" />
           </section>
           <section>
             GraalVM
           </section>
           <section>
-            <h2>Polyglot</h2>
+            <h3>Polyglot</h3>
             <img style="object-fit: contain; height: 300px;" src="img/enso-polyglot.png" />
             <img style="object-fit: contain; height: 150px;" src="img/enso-polyglot-2.png" />
           </section>
         </section>
-				<section>Enso IDE</section>
 				<section>
-          Требования к техническому стеку
-          <ul>
-            <li>Гибкость и кастомизируемость UI</li>
-            <li>Производительность</li>
-            <li>Кроссплатформенность</li>
-          </ul>
+          <h2>Enso IDE</h2>
+        </section>
+				<section>
+          <h2>Требования к техническому стеку</h2>
+          <ol>
+            <li class="fragment">Гибкость и кастомизируемость UI</li>
+            <li class="fragment">Производительность</li>
+            <li class="fragment">Кроссплатформенность</li>
+          </ol>
         </section>
 				<section>
           <h6 class="greyed-out">Кто мы и что делаем</h6>
@@ -129,7 +131,7 @@
           <h6 class="blurred">Конец?</h6>
         </section>
 				<section>
-          WebAssembly (WASM)
+          <h2>WebAssembly (WASM)</h2>
           <ul>
             <li>Стандарт виртуальной машины и байт-кода к ней</li>
             <li>Работает во всех современных браузерах</li>
@@ -139,14 +141,14 @@
           </ul>
         </section>
 				<section>
-          Rust — самый популярный язык для WASM
+          <h2>Rust — самый популярный язык для WASM</h2>
           <img src="img/wasm-languages.png" />
           <small><a href="https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html">https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html</a></small>
         </section>
 				<section>
-          DOM
           <section>
-          <img src="img/dom.png" />
+            <h2>DOM</h2>
+            <img src="img/dom.png" />
           </section>
           <section>
             <pre><code>
@@ -168,7 +170,7 @@ element.style.backgroundColor = "blue";
           </section>
         </section>
 				<section>
-          Canvas
+          <h2>Canvas</h2>
           <section>
             <div style="display: flex;">
             <pre><code data-trim style="font-size: 0.5em">
@@ -211,7 +213,7 @@ function draw() {
           <img style="object-fit: contain; height: 500px;" src="img/architecture.png" />
         </section>
 				<section>
-          Парсер
+          <h2>Парсер</h2>
           <ul>
             <li>Scala → Rust</li>
             <li>100 Мб → 4 Мб</li>
@@ -319,25 +321,27 @@ pub mod unstable(Unsable) {
 				<section>
           Пересборка
           <ul>
-            <li>20–30 секунд на каждую пересборку</li>
-            <li>Демо-сцены</li>
-            <li>./run gui watch --crate-path=app/gui/demo/icons</li>
+            <li class="fragment">20–30 секунд на каждую пересборку</li>
+            <li class="fragment">Демо-сцены</li>
           </ul>
+          <pre class="fragment"><code class="language-bash">./run gui watch --crate-path=app/gui/demo/icons</code></pre>
         </section>
-				<section>Отладка</section>
+				<section><h2>Отладка</h2></section>
 				<section>
-          Процесс починки бага
+          <h2>Процесс починки бага</h2>
           <ol>
-            <li>Учишься воспроизводить</li>
-            <li>Изучаешь исходники и думаешь</li>
-            <li>Если не придумал, добавляешь везде console::log</li>
-            <li>…</li>
-            <li>PROFIT</li>
+            <li class="fragment">Учишься воспроизводить</li>
+            <li class="fragment">Изучаешь исходники и думаешь</li>
+            <li class="fragment">Если не придумал, добавляешь везде <span style="font: (--r-code-font);">debug!()</span></li>
+            <li class="fragment">…</li>
+            <li class="fragment">PROFIT</li>
           </ol>
         </section>
-				<section>Тестирование</section>
 				<section>
-          «Война за производительность»
+          <h2>Тестирование</h2>
+        </section>
+				<section>
+          <h2>«Война за производительность»</h2>
           <ul>
             <li>Прекомпиляция шейдеров</li>
             <li>Инструментарий для профилирования</li>
@@ -348,11 +352,11 @@ pub mod unstable(Unsable) {
           </ul>
         </section>
 				<section>
-          Слишком долго
+          <h2>Слишком долго</h2>
           <ul>
-            <li>Разработка новых фичей и исправление багов занимает слишком много времени</li>
-            <li>Мы утопаем в низкоуровневых багах</li>
-            <li>Мы вынуждены реализовывать многие вещи с нуля</li>
+            <li class="fragment">Разработка новых фичей и исправление багов занимает слишком много времени</li>
+            <li class="fragment">Мы утопаем в низкоуровневых багах</li>
+            <li class="fragment">Мы вынуждены реализовывать многие вещи с нуля</li>
           </ul>
         </section>
 				<section>
