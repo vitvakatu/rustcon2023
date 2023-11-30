@@ -8,16 +8,238 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
 
 		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="plugin/highlight/intellij-light.css">
+
+    <style media="screen">
+      .photo-container {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      .photo-container img {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        margin: 0 auto;
+      }
+    </style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>Как (не) написать фронтенд на Rust</section>
+				<section>
+          О себе
+          <div style="display: flex">
+            <div class="photo-container">
+              <img class="photo" src="img/me.jpg" alt="Ilya Bogdanov, in greyscale" />
+            </div>
+            <div>
+              <ul>
+                <li>Илья Богданов</li>
+                <li>Больше пяти лет пишу на Rust</li>
+                <li>Преподаю на курсе Rust Developer в <a href="https://otus.ru/lessons/rust-developer">OTUS</a></li>
+                <li>Developer @ <a href="https://enso.org">Enso</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+				<section>Кто мы и что делаем</section>
+				<section>
+          <section>
+          Проблема
+          </section>
+          <section>
+            <img src="img/table1.png">
+          </section>
+          <section>
+            <img src="img/table2.png">
+          </section>
+          <section>
+            <img src="img/table3.png">
+          </section>
+        </section>
+				<section>
+          Решение
+          <video data-autoplay src="img/demo.mp4"></video>
+        </section>
+				<section>
+          Enso Language
+          <ul>
+            <li>Текстовое + визуальное представление</li>
+            <li>Функциональный (с типизированными значениями)</li>
+            <li>GraalVM</li>
+            <li>Полиглот</li>
+          </ul>
+        </section>
+				<section>Enso IDE</section>
+				<section>
+          Требования к техническому стеку
+          <ul>
+            <li>Гибкость и кастомизируемость UI</li>
+            <li>Производительность</li>
+            <li>Кроссплатформенность</li>
+          </ul>
+        </section>
+				<section>Как можно написать фронтенд на Rust?</section>
+				<section>
+          WebAssembly (WASM)
+          <ul>
+            <li>Стандарт виртуальной машины и байт-кода к ней</li>
+            <li>Работает во всех современных браузерах</li>
+            <li>Быстрый</li>
+            <li>Безопасный</li>
+            <li>Нет прямого доступа к ОС и DOM</li>
+          </ul>
+        </section>
+				<section>
+          Rust — самый популярный язык для WASM
+          <img src="img/wasm-languages.png" />
+          <small><a href="https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html">https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html</a></small>
+        </section>
+				<section>
+          DOM
+          <section>
+          <img src="img/dom.png" />
+          </section>
+          <section>
+            <pre><code>
+// Get the element with id "myElement"
+let element = document.getElementById("myElement");
+
+// Change the text content of the element
+element.textContent = "Hello, World!";
+
+// Change the background color of the element
+element.style.backgroundColor = "blue";
+            </code></pre>
+          </section>
+          <section>
+            <div style="display: flex;justify-content: space-around">
+            <img style="max-width: 200px; height: auto; object-fit: contain;"  src="img/react-logo.png" />
+            <img style="max-width: 200px; height: auto; object-fit: contain;" src="img/yew-logo.png" />
+            </div>
+          </section>
+        </section>
+				<section>
+          Canvas
+          <section>
+            <div style="display: flex;">
+            <pre><code data-trim style="font-size: 0.5em">
+function draw() {
+  const canvas = document.getElementById("canvas");
+  if (canvas.getContext) {
+    const ctx = canvas.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
+    ctx.moveTo(110, 75);
+    ctx.arc(75, 75, 35, 0, Math.PI, false); // Mouth (clockwise)
+    ctx.moveTo(65, 65);
+    ctx.arc(60, 65, 5, 0, Math.PI * 2, true); // Left eye
+    ctx.moveTo(95, 65);
+    ctx.arc(90, 65, 5, 0, Math.PI * 2, true); // Right eye
+    ctx.stroke();
+  }
+}
+            </code>
+            </pre>
+            <img style="object-fit: contain;" src="img/smile.png" />
+            </div>
+          </section>
+        </section>
+				<section>
+          <section>
+            <h2>WebGL <img style="vertical-align: bottom; height: 0.8em; object-fit: contain;" src="img/webgl-logo.png" /></h2>
+            <ul>
+              <li>Огрызок OpenGL ES</li>
+              <li>Порядком устарел</li>
+              <li>Шейдеры</li>
+            </ul>
+          </section>
+          <section>
+            <img src="img/webgl-pipeline.png" />
+          </section>
+        </section>
+				<section>
+          Архитектура
+          <ul>
+            <li>Java — бекенд</li>
+            <li>Rust — фронтенд</li>
+            <li>Electron для desktop-версии</li>
+            <li>Websocket + JSON RPC</li>
+            <li>Общий парсер</li>
+          </ul>
+        </section>
+				<section>
+          Парсер
+          <ul>
+            <li>Scala → Rust</li>
+            <li>100 Мб → 4 Мб</li>
+            <li>fn parse(string: &str) -> Result&lt;Ast&gt;</li>
+            <li>JNI-обертка для использования в бекенде</li>
+          </ul>
+        </section>
+				<section>EnsoGL</section>
+				<section>SDF (Signed Distance Function)</section>
+				<section>define_shape!</section>
+				<section>define_shape!</section>
+				<section>FRP (Functional Reactive Programming)</section>
+				<section>Как можно не написать фронтенд на Rust?</section>
+				<section>Многословность</section>
+				<section>
+          Пересборка
+          <ul>
+            <li>20–30 секунд на каждую пересборку</li>
+            <li>Демо-сцены</li>
+            <li>./run gui watch --crate-path=app/gui/demo/icons</li>
+          </ul>
+        </section>
+				<section>Отладка</section>
+				<section>
+          Процесс починки бага
+          <ol>
+            <li>Учишься воспроизводить</li>
+            <li>Изучаешь исходники и думаешь</li>
+            <li>Если не придумал, добавляешь везде console::log</li>
+            <li>…</li>
+            <li>PROFIT</li>
+          </ol>
+        </section>
+				<section>Тестирование</section>
+				<section>
+          «Война за производительность»
+          <ul>
+            <li>Прекомпиляция шейдеров</li>
+            <li>Инструментарий для профилирования</li>
+            <li>Меньше слоёв → меньше draw calls</li>
+            <li>Кэширование SDF-фигур в текстуру</li>
+            <li>Magic Rectangle</li>
+            <li>Оптимизации HTML</li>
+          </ul>
+        </section>
+				<section>
+          Слишком долго
+          <ul>
+            <li>Разработка новых фичей и исправление багов занимает слишком много времени</li>
+            <li>Мы утопаем в низкоуровневых багах</li>
+            <li>Мы вынуждены реализовывать многие вещи с нуля</li>
+          </ul>
+        </section>
+				<section>Конец?</section>
+				<section>Текущий статус</section>
+				<section>Выводы
+          <ul>
+            <li>У каждого языка и каждого инструмента есть свои сильные и слабые стороны. Не забывайте об этом.</li>
+            <li>Трезво оценивайте свои возможности.</li>
+          </ul>
+        </section>
+				<section>Спасибо за внимание</section>
 			</div>
 		</div>
 
@@ -31,6 +253,9 @@
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
+        progress: true,
+        slideNumber: 'c/t',
+        navigationMode: 'linear',
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
