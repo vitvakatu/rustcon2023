@@ -53,6 +53,7 @@
 			<div class="slides">
 				<section><h1>Как (не) написать фронтенд на Rust</h1></section>
 				<section>
+          <section>
           <h2>О себе</h2>
           <div style="display: flex">
             <div class="photo-container">
@@ -67,6 +68,10 @@
               </ul>
             </div>
           </div>
+          </section>
+          <section>
+            <img src="img/cv.png" />
+          </section>
         </section>
 				<section>
           <h2>Кто мы и что делаем</h2>
@@ -105,7 +110,9 @@
             <img style="object-fit: contain; height: 450px;" src="img/enso-complex.png" />
           </section>
           <section>
-            GraalVM
+            <h3>GraalVM</h3>
+            <img style="object-fit: contain; height: 400px;" src="img/graalvm.jpeg" /><br/>
+            <small><a href="https://rieckpil.de/whatis-graalvm/">https://rieckpil.de/whatis-graalvm/</a></small>
           </section>
           <section>
             <h3>Polyglot</h3>
@@ -115,6 +122,7 @@
         </section>
 				<section>
           <h2>Enso IDE</h2>
+          <img style="object-fit: contain; height: 500px;" src="img/enso-ide.png" />
         </section>
 				<section>
           <h2>Требования к техническому стеку</h2>
@@ -133,11 +141,11 @@
 				<section>
           <h2>WebAssembly (WASM)</h2>
           <ul>
-            <li>Стандарт виртуальной машины и байт-кода к ней</li>
-            <li>Работает во всех современных браузерах</li>
-            <li>Быстрый</li>
-            <li>Безопасный</li>
-            <li>Нет прямого доступа к ОС и DOM</li>
+            <li class="fragment">Стандарт виртуальной машины и байт-кода к ней</li>
+            <li class="fragment">Работает во всех современных браузерах</li>
+            <li class="fragment">Быстрый</li>
+            <li class="fragment">Безопасный</li>
+            <li class="fragment">Нет прямого доступа к ОС и DOM</li>
           </ul>
         </section>
 				<section>
@@ -199,9 +207,9 @@ function draw() {
           <section>
             <h2>WebGL <img style="vertical-align: bottom; height: 0.8em; object-fit: contain;" src="img/webgl-logo.png" /></h2>
             <ul>
-              <li>Огрызок OpenGL ES</li>
-              <li>Порядком устарел</li>
-              <li>Шейдеры</li>
+              <li class="fragment">Огрызок OpenGL ES</li>
+              <li class="fragment">Порядком устарел</li>
+              <li class="fragment">Шейдеры</li>
             </ul>
           </section>
           <section>
@@ -227,11 +235,64 @@ function draw() {
           <h2>SDF (Signed Distance Function)</h2>
 \[
   f(x) = \begin{cases}
-   d(x, \partial \Omega) & \text{if }\, x \in \Omega \\
-  -d(x, \partial \Omega) & \text{if }\, x \in \Omega^c
+  -d(x, \partial \Omega) & \text{if }\, x \in \Omega \\
+   d(x, \partial \Omega) & \text{if }\, x \in \Omega^c
   \end{cases}
 \]
-</section>
+          </section>
+          <section>
+            <img src="img/sdf-basic.png" />
+          </section>
+          <section>
+            <div style="display:flex;">
+            <pre><code data-trim data-noescape class="language-glsl">
+float sdCircle( vec2 p, float r )
+{
+    return length(p) - r;
+}
+            </code></pre>
+            <img style="object-fit: contain;" src="img/sdf-circle.png" />
+            </div>
+            <small><a href="https://iquilezles.org/articles/distfunctions2d/">https://iquilezles.org/articles/distfunctions2d/</a></small>
+          </section>
+          <section>
+            <div style="display:flex;">
+            <pre><code data-trim data-noescape class="language-glsl">
+float sdBox( in vec2 p, in vec2 b )
+{
+    vec2 d = abs(p)-b;
+    return length(max(d,0.0)) + min(max(d.x,d.y),0.0);
+}
+            </code></pre>
+            <img style="object-fit: contain;" src="img/sdf-box.png" />
+            </div>
+            <small><a href="https://iquilezles.org/articles/distfunctions2d/">https://iquilezles.org/articles/distfunctions2d/</a></small>
+          </section>
+          <section>
+            <div style="display:flex;">
+            <pre><code data-trim data-noescape style="font-size: 0.8em;" class="language-glsl">
+float sdMoon(vec2 p, float d, float ra, float rb )
+{
+    p.y = abs(p.y);
+    float a = (ra*ra - rb*rb + d*d)/(2.0*d);
+    float b = sqrt(max(ra*ra-a*a,0.0));
+    if( d*(p.x*b-p.y*a) > d*d*max(b-p.y,0.0) )
+          return length(p-vec2(a,b));
+    return max( (length(p          )-ra),
+               -(length(p-vec2(d,0))-rb));
+}
+            </code></pre>
+            <img style="object-fit: contain;" src="img/sdf-moon.png" />
+            </div>
+            <small><a href="https://iquilezles.org/articles/distfunctions2d/">https://iquilezles.org/articles/distfunctions2d/</a></small>
+          </section>
+          <section>
+            <img style="object-fit: contain; height: 500px;" src="img/sdf-bool.png" />
+          </section>
+          <section>
+            <video data-autoplay src="img/sdf-demo.webm"></video>
+            <small><a href="https://www.shadertoy.com/view/lt3BW2">https://www.shadertoy.com/view/lt3BW2</a></small>
+          </section>
           <section>
             <div style="display: flex;">
               <pre><code data-trim data-noescape data-line-numbers="1-16|8,9|10,11|12|13" style="font-size: 0.6em; line-height: 1.8em;" class="language-rust">
@@ -343,12 +404,12 @@ pub mod unstable(Unsable) {
 				<section>
           <h2>«Война за производительность»</h2>
           <ul>
-            <li>Прекомпиляция шейдеров</li>
-            <li>Инструментарий для профилирования</li>
-            <li>Меньше слоёв → меньше draw calls</li>
-            <li>Кэширование SDF-фигур в текстуру</li>
-            <li>Magic Rectangle</li>
-            <li>Оптимизации HTML</li>
+            <li class="fragment">Прекомпиляция шейдеров</li>
+            <li class="fragment">Инструментарий для профилирования</li>
+            <li class="fragment">Меньше слоёв → меньше draw calls</li>
+            <li class="fragment">Кэширование SDF-фигур в текстуру</li>
+            <li class="fragment">Magic Rectangle</li>
+            <li class="fragment">Оптимизации HTML</li>
           </ul>
         </section>
 				<section>
