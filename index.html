@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>RustCon 2023</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -28,14 +28,32 @@
         object-fit: cover;
         margin: 0 auto;
       }
+      .blurred {
+        filter: blur(10px);
+      }
+      .greyed-out {
+        opacity: 0.5;
+      }
+      h6 {
+        font-size: 0.8em;
+      }
+      .reveal ul {
+        list-style-type: none; /* Remove default markers */
+      }
+
+      li:before {
+        content: "→"; /* Use the desired marker symbol */
+        color: black; /* Customize the marker color */
+        margin-right: 0.5em; /* Adjust the spacing between the marker and the content */
+      }
     </style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Как (не) написать фронтенд на Rust</section>
+				<section><h1>Как (не) написать фронтенд на Rust</h1></section>
 				<section>
-          О себе
+          <h2>О себе</h2>
           <div style="display: flex">
             <div class="photo-container">
               <img class="photo" src="img/me.jpg" alt="Ilya Bogdanov, in greyscale" />
@@ -50,7 +68,12 @@
             </div>
           </div>
         </section>
-				<section>Кто мы и что делаем</section>
+				<section>
+          <h2>Кто мы и что делаем</h2>
+          <h6 class="blurred">Как можно написать фронтенд на Rust?</h6>
+          <h6 class="blurred">Как можно не написать фронтенд на Rust?</h6>
+          <h6 class="blurred">Конец?</h6>
+        </section>
 				<section>
           <section>
           Проблема
@@ -70,13 +93,25 @@
           <video data-autoplay src="img/demo.mp4"></video>
         </section>
 				<section>
-          Enso Language
-          <ul>
-            <li>Текстовое + визуальное представление</li>
-            <li>Функциональный (с типизированными значениями)</li>
-            <li>GraalVM</li>
-            <li>Полиглот</li>
-          </ul>
+          <section>
+            Enso Language
+          </section>
+          <section>
+            Текстовое + визуальное представление
+            <img src="img/enso-demo.png" />
+          </section>
+          <section>
+            <h2>Функциональный</h2>
+            <img style="object-fit: contain; height: 450px;" src="img/enso-complex.png" />
+          </section>
+          <section>
+            GraalVM
+          </section>
+          <section>
+            <h2>Polyglot</h2>
+            <img style="object-fit: contain; height: 300px;" src="img/enso-polyglot.png" />
+            <img style="object-fit: contain; height: 150px;" src="img/enso-polyglot-2.png" />
+          </section>
         </section>
 				<section>Enso IDE</section>
 				<section>
@@ -87,7 +122,12 @@
             <li>Кроссплатформенность</li>
           </ul>
         </section>
-				<section>Как можно написать фронтенд на Rust?</section>
+				<section>
+          <h6 class="greyed-out">Кто мы и что делаем</h6>
+          <h2>Как можно написать фронтенд на Rust?</h2>
+          <h6 class="blurred">Как можно не написать фронтенд на Rust?</h6>
+          <h6 class="blurred">Конец?</h6>
+        </section>
 				<section>
           WebAssembly (WASM)
           <ul>
@@ -167,14 +207,8 @@ function draw() {
           </section>
         </section>
 				<section>
-          Архитектура
-          <ul>
-            <li>Java — бекенд</li>
-            <li>Rust — фронтенд</li>
-            <li>Electron для desktop-версии</li>
-            <li>Websocket + JSON RPC</li>
-            <li>Общий парсер</li>
-          </ul>
+          <h2>Архитектура</h2>
+          <img style="object-fit: contain; height: 500px;" src="img/architecture.png" />
         </section>
 				<section>
           Парсер
@@ -186,11 +220,24 @@ function draw() {
           </ul>
         </section>
 				<section>EnsoGL</section>
-				<section>SDF (Signed Distance Function)</section>
+				<section>
+          <h2>SDF (Signed Distance Function)</h2>
+\[
+  f(x) = \begin{cases}
+   d(x, \partial \Omega) & \text{if }\, x \in \Omega \\
+  -d(x, \partial \Omega) & \text{if }\, x \in \Omega^c
+  \end{cases}
+\]
+        </section>
 				<section>define_shape!</section>
 				<section>define_shape!</section>
 				<section>FRP (Functional Reactive Programming)</section>
-				<section>Как можно не написать фронтенд на Rust?</section>
+				<section>
+          <h6 class="greyed-out">Кто мы и что делаем</h6>
+          <h6 class="greyed-out">Как можно написать фронтенд на Rust?</h6>
+          <h2>Как можно не написать фронтенд на Rust?</h2>
+          <h6 class="blurred">Конец?</h6>
+        </section>
 				<section>Многословность</section>
 				<section>
           Пересборка
@@ -231,15 +278,36 @@ function draw() {
             <li>Мы вынуждены реализовывать многие вещи с нуля</li>
           </ul>
         </section>
-				<section>Конец?</section>
-				<section>Текущий статус</section>
-				<section>Выводы
+				<section>
+          <h6 class="greyed-out">Кто мы и что делаем</h6>
+          <h6 class="greyed-out">Как можно написать фронтенд на Rust?</h6>
+          <h6 class="greyed-out">Как можно не написать фронтенд на Rust?</h6>
+          <h2>Конец?</h2>
+        </section>
+				<section>
+          <section>
+            <h2>Текущий статус</h2>
+            <img src="img/current-status.png" />
+          </section>
+          <section>
+            <video data-autoplay src="img/demo-new-ide.mp4">
+          </section>
+        </section>
+				<section>
+          <h2>Выводы</h2>
           <ul>
-            <li>У каждого языка и каждого инструмента есть свои сильные и слабые стороны. Не забывайте об этом.</li>
-            <li>Трезво оценивайте свои возможности.</li>
+          <li class="fragment">У каждого инструмента есть сильные и слабые стороны</li>
+          <li class="fragment">Трезво оценивайте свои возможности</li>
           </ul>
         </section>
-				<section>Спасибо за внимание</section>
+				<section>
+          <h2>Спасибо за внимание</h2>
+          <p>Слайды: <a href="https://github.com/vitvakatu/rustcon2023">vitvakatu/rustcon2023</a></p>
+          <p>Мой Telegram: <a href="https://t.me/vitvakatu">@vitvakatu</a></p>
+          <br/>
+          <p>Наш сайт: <a href="https://enso.org">Enso.org</a></p>
+          <p>Наш GitHub: <a href="https://github.com/enso-org/enso">enso-org/enso</a></p>
+        </section>
 			</div>
 		</div>
 
@@ -247,6 +315,7 @@ function draw() {
 		<script src="plugin/notes/notes.js"></script>
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/math/math.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -258,7 +327,7 @@ function draw() {
         navigationMode: 'linear',
 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
 			});
 		</script>
 	</body>
