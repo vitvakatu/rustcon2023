@@ -221,6 +221,7 @@ function draw() {
         </section>
 				<section>EnsoGL</section>
 				<section>
+          <section>
           <h2>SDF (Signed Distance Function)</h2>
 \[
   f(x) = \begin{cases}
@@ -228,9 +229,85 @@ function draw() {
   -d(x, \partial \Omega) & \text{if }\, x \in \Omega^c
   \end{cases}
 \]
+</section>
+          <section>
+            <div style="display: flex;">
+              <pre><code data-trim data-noescape data-line-numbers="1-16|8,9|10,11|12|13" style="font-size: 0.6em; line-height: 1.8em;" class="language-rust">
+/// Local scope section button. A dot inside a circle.
+pub mod local_scope(LocalScope) {
+    ensogl_core::define_shape! {
+        alignment = center;
+        (style: Style) {
+            let dull_alpha: Var&lt;f32&gt; = style.get_number(dull_color_alpha).into();
+            let dull_color = &amp;VIVID_COLOR * &amp;dull_alpha;
+            let dot = Circle(3.0.px());
+            let dot = dot.fill(VIVID_COLOR.glsl());
+            let outer = Circle(8.0.px()) - Circle(5.0.px());
+            let outer = outer.fill(dull_color.glsl());
+            let shape = outer + dot;
+            shape.into()
+        }
+    }
+}
+              </code></pre>
+              <img src="img/icon-simple.png" />
+            </div>
+          </section>
+          <section>
+            <div style="display: flex;">
+              <pre><code data-trim data-noescape style="font-size: 0.4em; line-height: 1.2em;" class="language-rust">
+/// A road cone.
+pub mod unstable(Unsable) {
+    ensogl_core::define_shape! {
+        alignment = center;
+        (style: Style) {
+            let x_radius = 8.0;
+            let y_radius = x_radius * 0.465;
+            let bottom = Ellipse(x_radius.px(), y_radius.px());
+            let bottom_pos_y = -SIZE / 2.0 + y_radius;
+            let bottom = bottom.translate_y(bottom_pos_y.px());
+            let bottom_center = Ellipse(5.0.px(), 2.0.px()).translate_y((-3.0).px());
+            let height = 12.5;
+            let y_offset = height / 2.0 - 3.0;
+            let bottom_triangle = Triangle(10.0.px(), height.px()).translate_y(y_offset.px());
+            let bottom_mask = bottom_center + bottom_triangle;
+            let bottom = bottom - bottom_mask;
+
+            let x_radius = 4.0;
+            let y_radius = 1.5;
+            let middle = Ellipse(x_radius.px(), y_radius.px());
+            let middle_pos_y = -0.5;
+            let middle = middle.translate_y(middle_pos_y.px());
+            let height = 10.0;
+            let y_offset = middle_pos_y + height / 2.0;
+            let middle_triangle = Triangle(8.0.px(), height.px()).translate_y(y_offset.px());
+            let middle = middle + middle_triangle;
+            let mask_y = middle_pos_y + 2.5;
+            let mask = HalfPlane().translate_y(mask_y.px());
+            let mask_ellipse = Ellipse(3.0.px(), 1.0.px()).translate_y(mask_y.px());
+            let mask = mask + mask_ellipse;
+            let middle = middle - mask;
+
+            let height = 5.5;
+            let top_pos_y = middle_pos_y + 4.5;
+            let y_offset = top_pos_y + height / 2.0;
+            let top_triangle = Triangle(4.4.px(), height.px()).translate_y(y_offset.px());
+            let triangle_mask = HalfPlane().translate_y((SIZE / 2.0 - 1.0).px());
+            let top_triangle = top_triangle - triangle_mask;
+            let top_ellipse = Ellipse(2.2.px(), 0.4.px()).translate_y(top_pos_y.px());
+            let top = top_triangle + top_ellipse;
+
+            let shape = bottom + middle + top;
+            let shape = shape.fill(VIVID_COLOR.glsl());
+            shape.into()
+        }
+    }
+}
+              </code></pre>
+              <img style="object-fit: contain; height: 300px;" src="img/icon-complex.png" />
+            </div>
+          </section>
         </section>
-				<section>define_shape!</section>
-				<section>define_shape!</section>
 				<section>FRP (Functional Reactive Programming)</section>
 				<section>
           <h6 class="greyed-out">Кто мы и что делаем</h6>
