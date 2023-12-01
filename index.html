@@ -307,7 +307,7 @@ float sdMoon(vec2 p, float d, float ra, float rb )
           </section>
           <section>
             <div style="display: flex;">
-              <pre><code data-trim data-noescape data-line-numbers="1-16|8,9|10,11|12|13" style="font-size: 0.6em; line-height: 1.8em;" class="language-rust">
+              <pre><code data-trim data-noescape data-line-numbers="1-16|8,9|10,11|12" style="font-size: 0.6em; line-height: 1.8em;" class="language-rust">
 /// Local scope section button. A dot inside a circle.
 pub mod local_scope(LocalScope) {
     ensogl_core::define_shape! {
@@ -327,6 +327,24 @@ pub mod local_scope(LocalScope) {
               </code></pre>
               <img style="object-fit: contain; height: 300px;" src="img/icon-simple.png" />
             </div>
+          </section>
+          <section>
+            <pre><code data-trim style="font-size: 0.7em;line-height: 1.8em;" class="language-glsl">
+// A lot of lines of code…
+bool _3286 = mod(input_local.x, input_size.x * 0.5) < (input_size.x * 0.25);
+bool _3294 = mod(input_local.y, input_size.y * 0.5) < (input_size.y * 0.25);
+bool _3298 = _3286 || _3294;
+bool _3305;
+if (_3298)
+{
+    _3305 = !(_3286 && _3294);
+}
+else
+{
+    _3305 = _3298;
+}
+output_color = mix(vec4(0.0, 0.0, 0.0, 1.0), vec4(1.0, 0.0, 0.0, 1.0), bvec4(_3305));
+            </code></pre>
           </section>
           <section>
             <div style="display: flex;">
@@ -382,24 +400,6 @@ pub mod unstable(Unsable) {
               <img style="object-fit: contain; height: 300px;" src="img/icon-complex.png" />
             </div>
           </section>
-          <section>
-            <pre><code data-trim style="font-size: 0.7em;line-height: 1.8em;" class="language-glsl">
-// A lot of lines of code…
-bool _3286 = mod(input_local.x, input_size.x * 0.5) < (input_size.x * 0.25);
-bool _3294 = mod(input_local.y, input_size.y * 0.5) < (input_size.y * 0.25);
-bool _3298 = _3286 || _3294;
-bool _3305;
-if (_3298)
-{
-    _3305 = !(_3286 && _3294);
-}
-else
-{
-    _3305 = _3298;
-}
-output_color = mix(vec4(0.0, 0.0, 0.0, 1.0), vec4(1.0, 0.0, 0.0, 1.0), bvec4(_3305));
-            </code></pre>
-          </section>
         </section>
 				<section>
           <section>
@@ -433,7 +433,7 @@ ensogl_core::define_endpoints! {
 frp::extend! { network
     all_nodes <= inputs.remove_all_nodes.map(f_!(model.nodes.keys()));
     selected_nodes <= inputs.remove_selected_nodes.map(f_!(model.nodes.all_selected()));
-    nodes_remove <- any (all_nodes, selected_nodes);
+    nodes_to_remove <- any (all_nodes, selected_nodes);
     out.node_removed <+ nodes_to_remove;
 }
             </code></pre>
@@ -481,7 +481,7 @@ let mousemove = Closure::&lt;dyn Fn(MouseEvent)&gt;::wrap(Box::new(|e| {
 				<section>
           <h2>Пересборка</h2>
           <ul>
-            <li class="fragment">20–30 секунд на каждую пересборку</li>
+            <li class="fragment">20–40 секунд на каждую пересборку</li>
             <li class="fragment">Демо-сцены</li>
           </ul>
           <pre class="fragment"><code class="language-bash">./run gui watch --crate-path=app/gui/demo/icons</code></pre>
